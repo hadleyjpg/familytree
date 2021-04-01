@@ -34,19 +34,39 @@ router.post('/', async (req, res) => {
   res.render("index");
 });
 
-// Send a PUT request to /:id/edit to UPDATE (edit) a family member
+// Send a PUT request to /member/:id/edit to UPDATE (edit) a family member
 
-router.put('/:id/edit', async (req, res) => {
-  res.render("edit");
+router.put('/member/:id/edit', async (req, res) => {
+  let member;
+  try {
+    member = await Member.findByPk(req.params.id);
+    if(member) {
+      await member.update(req.body);
+      res.redirect("/member/" + member.id); 
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (error) {
+    if(error.name === "SequelizeValidationError") {
+      member = await Member.build(req.body);
+      member.id = req.params.id; // make sure correct member gets updated
+      res.render("edit")
+    } else {
+      throw error;
+    }
+  }
 });
 
-// Send a DELETE request to /:id to DELETE a family member
+// Send a DELETE request to /member/:id/delete to DELETE a family member
 
-router.delete("/:id/delete", async(req,res, next) => {
-  res.render("delete");
-
-
-  res.redirect("/");
+router.delete("/member/:id/delete", async(req,res, next) => {
+  const member = await Member.findByPk(req.params.id);
+  if(member) {
+    await member.destroy();
+    res.redirect("/");
+  } else {
+    res.sendStatus(404);
+  }
 });
 
 
