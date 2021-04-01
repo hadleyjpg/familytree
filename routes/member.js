@@ -16,27 +16,43 @@ function asyncHandler(cb){
 
 // Send a GET request to / to READ a list of family members
 
-router.get('/', async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
   const members = await Member.findAll();
   res.render("index");
-});
+}));
 
 // Send a GET request to /member/:id to READ (view) a family member
 
-router.get('/member/:id', async (req, res) => {
-  res.render("member");
-});
+router.get('/member/:id', asyncHandler(async (req, res) => {
+  const member = await Member.findByPk(req.params.id);
+  if(member) {
+    res.render("member", { member });
+  } else {
+    res.render("error");
+    res.sendStatus(404);
+  }
+}));
 
 // Send a POST request to / to CREATE a new family member
 
-router.post('/', async (req, res) => {
-  const member = await Member.create(req.body);
-  res.render("index");
-});
+router.post('/', asyncHandler(async (req, res) => {
+  let member;
+  try {
+    member = await Member.create(req.body);
+    res.redirect("/members/" + member.id);
+  } catch(error) {
+      if(error.name === "SequelizeValidationError") {
+        member = await Member.build(req.body);
+        res.render("members/new", { member, errors: error.errors })
+      } else {
+        throw error;
+      }
+  }
+}));
 
 // Send a PUT request to /member/:id/edit to UPDATE (edit) a family member
 
-router.put('/member/:id/edit', async (req, res) => {
+router.put('/member/:id/edit', asyncHandler(async (req, res) => {
   let member;
   try {
     member = await Member.findByPk(req.params.id);
@@ -49,17 +65,30 @@ router.put('/member/:id/edit', async (req, res) => {
   } catch (error) {
     if(error.name === "SequelizeValidationError") {
       member = await Member.build(req.body);
-      member.id = req.params.id; // make sure correct member gets updated
+      member.id = req.params.id;
       res.render("edit")
     } else {
       throw error;
     }
   }
-});
+}));
+
+
+// DELETE confirmation page
+
+router.get("/member/:id/delete", asyncHandler(async (req, res) => {
+  const member = await Member.findByPk(req.params.id);
+  if(member) {
+    res.render("members/delete", { member, title: "Delete Article" });
+  } else {
+    res.sendStatus(404);
+  }
+}));
+
 
 // Send a DELETE request to /member/:id/delete to DELETE a family member
 
-router.delete("/member/:id/delete", async(req,res, next) => {
+router.delete("/member/:id/delete", asyncHandler(async (req,res, next) => {
   const member = await Member.findByPk(req.params.id);
   if(member) {
     await member.destroy();
@@ -67,7 +96,7 @@ router.delete("/member/:id/delete", async(req,res, next) => {
   } else {
     res.sendStatus(404);
   }
-});
+}));
 
 
 
