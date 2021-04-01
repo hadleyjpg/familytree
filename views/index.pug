@@ -1,11 +1,36 @@
-doctype html
-html(lang="en")
-  head
-    title The Slucher Family Tree
-  body
-    header
-        h1 The Slucher Family Tree
-    section#content
-        h2= name
-        if birthday
-            p Birthday: #{birthday}
+extends layout.pug
+
+block content
+    section#form
+      form(action="/", method='post')
+        input(type="text" name="firstname" placeholder="First Name")
+        input(type="text" name="lastname" placeholder="Last Name")
+        input(type="date" name="birthday" placeholder="Birthdate")
+        select(name="role" placeholder="Role")
+            option(value="parent") Parent
+            option(value="child") Child 
+        
+        button.btn--submit(type='submit')
+          svg(xmlns='http://www.w3.org/2000/svg' width='37.818' height='37.818' viewbox='0 0 37.818 37.818')
+            g#Group_2(data-name='Group 2' transform='translate(707.631 -36.952) rotate(135)')
+              line#Line_4(data-name='Line 4' x1='23' y2='22' transform='translate(515 436.5)' fill='none' stroke='#e5ead6' stroke-linecap='round' stroke-width='3')
+              line#Line_5(data-name='Line 5' x2='21.5' y2='22' transform='translate(515.75 436.5)' fill='none' stroke='#e5ead6' stroke-linecap='round' stroke-width='3')
+
+
+    section#cards
+    each member in members
+    member
+      div.cards__single
+          div.cards__text
+            h3= member.name
+            p= member.birthday
+            p= member.role
+          div.btn__changes
+            button.btn--edit
+              svg(xmlns='http://www.w3.org/2000/svg' width='29.846' height='29.843' viewbox='0 0 29.846 29.843')
+                path#Path_1(data-name='Path 1' d='M41.419,16.172a4.11,4.11,0,0,0-5.808,0l-1.454,1.462L18.682,33.1l-.033.033c-.008.008-.008.016-.016.016-.016.025-.041.049-.057.074,0,.008-.008.008-.008.016-.016.025-.024.041-.041.066-.008.008-.008.016-.016.025-.008.025-.016.041-.025.066,0,.008-.008.008-.008.016L15.044,43.738a.808.808,0,0,0,.2.838.827.827,0,0,0,.583.238.972.972,0,0,0,.263-.041L26.4,41.331c.008,0,.008,0,.016-.008a.3.3,0,0,0,.074-.033.029.029,0,0,0,.017-.008c.024-.016.057-.033.082-.05s.049-.041.074-.057c.008-.008.016-.008.016-.016s.025-.016.033-.033L43.644,24.2a4.11,4.11,0,0,0,0-5.807ZM26.141,39.4l-5.717-5.717L34.732,19.376l5.717,5.717Zm-6.522-4.2L24.613,40.2l-7.5,2.5ZM42.486,23.047l-.871.879L35.9,18.209l.879-.879a2.464,2.464,0,0,1,3.482,0l2.234,2.234A2.472,2.472,0,0,1,42.486,23.047Z' transform='translate(-15 -14.971)' fill='#e5ead6')
+            button.btn--delete
+              svg(xmlns='http://www.w3.org/2000/svg' width='27.242' height='26.242' viewbox='0 0 27.242 26.242')
+                g#Group_1(data-name='Group 1' transform='translate(-512.879 -434.379)')
+                  line#Line_4(data-name='Line 4' x1='23' y2='22' transform='translate(515 436.5)' fill='none' stroke='#e5ead6' stroke-linecap='round' stroke-width='3')
+                  line#Line_5(data-name='Line 5' x2='21.5' y2='22' transform='translate(515.75 436.5)' fill='none' stroke='#e5ead6' stroke-linecap='round' stroke-width='3')

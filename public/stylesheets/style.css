@@ -1,0 +1,126 @@
+:root {
+    --accent: #B7D3C7;
+    --second: #88915E;
+    --third: #303B41;
+    --fourth: #E5EAD6;
+    --fifth: #A3BEB2;
+    --body: 'embury-text', serif;
+    --title: 'roc-grotesk-wide', sans-serif;
+}
+
+
+/* --------------
+     General 
+----------------- */
+
+body {
+    background-color: var(--accent);
+    width: 75%;
+    margin: 0 auto;
+    font-family: var(--body);
+    color: var(--third);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--title);
+    font-weight: 400;
+}
+
+
+/* --------------
+      Layout
+----------------- */
+
+header {
+    text-align: center;
+    padding: 5% 0;
+}
+
+#cards {
+    margin-top: 10%;
+    display: flex;
+}
+
+.cards__single {
+    background-color: var(--fourth);
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cards__text {
+    padding: 30px;
+    padding-right: 0;
+}
+
+.btn__changes {
+    display: none;
+}
+
+.cards__single:hover .btn__changes {
+    display: flex;
+    flex-direction: column;
+    flex
+    position: relative;
+    right: 0px;
+    top: 0px;
+    transition-duration: .25s;
+}
+
+.cards__single:hover {
+    box-shadow: 1px 1px 50px rgba(169, 190, 178, 0.5) !important;
+    transition-duration: .25s;
+}
+
+
+/* --------------
+      Buttons
+----------------- */
+
+svg {
+    fill: var(--fourth);
+    height: 25px;
+}
+
+button {
+    background-color: var(--third);
+    padding: 12px 23px;
+    cursor: pointer;
+}
+
+.btn--submit:hover svg {
+    transform: rotate(90deg);
+    transition-duration: .5s;
+}
+
+.btn--edit {
+    background-color: var(--second);
+}
+
+
+
+/* --------------
+      Form 
+----------------- */
+
+form {
+    display: flex;
+    justify-content: space-between;
+}
+
+form > *:not(:last-child) {
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+input, select {
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid var(--fifth);
+    color: var(--fifth);
+}
+
+input::placeholder {
+    color: var(--fifth);
+    font-size: 16px;
+}
