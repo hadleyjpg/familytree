@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       birthday: {
-        type: Sequelize.DATEONLY.format('MMMM D, YYYY'),
+        type: Sequelize.DATEONLY,
         allowNull: false,
       },
       role: {
