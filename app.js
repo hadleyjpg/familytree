@@ -1,31 +1,35 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const createError = require('http-errors');
+const path = require('path');
+const logger = require('morgan');
+
+const mainRoutes = require('./routes');
+const members = require('./routes/member');
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use('/static', express.static('public'));
-
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+app.disable('x-powered-by');
 
-const mainRoutes = require('./routes');
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(mainRoutes);
+app.use(members);
 
-const model = require('./models');
 
-
-app.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+app.use( (req, res, next) => {
+  next(createError(404));
 });
 
-app.use((err, req, res, next) => {
-    res.locals.error = err;
-    res.status(err.status);
-    res.render('error');
+app.use( (err, req, res, next) => {
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.status(err.status || 500);
+  res.render('error');
 });
 
-
-app.listen(3000);
+module.exports = app;

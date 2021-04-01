@@ -1,21 +1,22 @@
 {
-  "name": "familytree",
+  "name": "blog",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "A simple blog application",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./bin/www"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.5",
-    "dotenv": "^8.2.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
     "express": "^4.17.1",
-    "mysql2": "^2.2.5",
+    "http-errors": "^1.6.3",
+    "moment": "^2.24.0",
+    "morgan": "~1.9.1",
+    "nodemon": "^1.19.2",
     "pug": "^3.0.2",
-    "sequelize": "^6.6.2"
+    "sequelize": "^5.18.4",
+    "sequelize-cli": "^6.2.0",
+    "sqlite3": "^4.1.0"
   }
 }
