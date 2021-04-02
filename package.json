@@ -4,13 +4,16 @@
   "description": "A simple blog application",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "test": "mocha **/*.test.js"
   },
   "dependencies": {
+    "chai": "^4.3.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "^4.17.1",
     "http-errors": "^1.6.3",
+    "mocha": "^8.3.2",
     "moment": "^2.24.0",
     "morgan": "~1.9.1",
     "nodemon": "^1.19.2",
@@ -18,5 +21,8 @@
     "sequelize": "^5.18.4",
     "sequelize-cli": "^6.2.0",
     "sqlite3": "^4.1.0"
+  },
+  "devDependencies": {
+    "supertest": "^6.1.3"
   }
 }

@@ -9,37 +9,37 @@ module.exports = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      firstname: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: 'First name is required'
-          }
-        },
+    firstname: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'First name is required'
+        }
       },
-      lastname: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: 'Last name is required'
-          }
-        },
+    },
+    lastname: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Last name is required'
+        }
       },
-      birthday: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: 'Birthday is required'
-          }
-        },
+    },
+    birthday: {
+      type: Sequelize.DATEONLY,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Birthday is required'
+        }
       },
-      role: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      }
+    },
+    role: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    }
     }, { sequelize });
 
   return Member;

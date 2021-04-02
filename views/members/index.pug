@@ -1,0 +1,12 @@
+extends layout.pug
+
+block content
+  section#form
+    form(action="/", method="post")
+      include form
+  
+each member in members
+  h3= member.firstname
+  p= member.birthday
+  a(href = "/member/" + member.id) Read More &rarr;
+

@@ -16,9 +16,9 @@ function asyncHandler(cb){
 
 // Send a GET request to / to READ a list of family members
 
-router.get('/', asyncHandler(async (req, res) => {
+router.get('/members', asyncHandler(async (req, res) => {
   const members = await Member.findAll();
-  res.render("index");
+  res.render("members/index", { members });
 }));
 
 // Send a GET request to /member/:id to READ (view) a family member
@@ -39,11 +39,11 @@ router.post('/', asyncHandler(async (req, res) => {
   let member;
   try {
     member = await Member.create(req.body);
-    res.redirect("/members/" + member.id);
+    res.render("members/index");
   } catch(error) {
       if(error.name === "SequelizeValidationError") {
         member = await Member.build(req.body);
-        res.render("members/new", { member, errors: error.errors })
+        res.render("index", { member, errors: error.errors })
       } else {
         throw error;
       }
@@ -66,7 +66,7 @@ router.put('/member/:id/edit', asyncHandler(async (req, res) => {
     if(error.name === "SequelizeValidationError") {
       member = await Member.build(req.body);
       member.id = req.params.id;
-      res.render("edit")
+      res.render("members/edit")
     } else {
       throw error;
     }
