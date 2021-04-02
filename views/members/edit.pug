@@ -1,9 +1,9 @@
 extends ../layout
 
 block content
-  h2= title
+  h2.center Edit #{member.firstname} #{member.lastname}
   
   include errors
   
-  form(action="/member/" + member.id + "/edit", method="post")
+  form(action="/members/" + member.id + "/edit", method="post")
     include form

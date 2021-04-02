@@ -38,7 +38,8 @@ module.exports = (sequelize) => {
     },
     role: {
       type: Sequelize.STRING,
-      allowNull: false,
+      allowNull: true,
+      unique: false,
     }
     }, { sequelize });
 

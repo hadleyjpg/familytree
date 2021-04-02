@@ -1,12 +1,10 @@
 extends ../layout
 
 block content
-  h2= title
-  p 
-    | Are you sure you want to delete 
-    em= member.title
-    | ?
-  form(action="/member/" + member.id + "/delete", method="post")
-    a(href="/member/" + member.id) No! Take me back! 
-    | 
-    input(type="submit", value = "Yes, I'm sure")
+  div.delete
+    h2 Are you sure you want to delete #{member.firstname} #{member.lastname}
+      | ?
+    form(action="/members/" + member.id + "/delete", method="post", class="form--delete")
+      a(href="/members/" + member.id) No! Take me back! 
+      | 
+      input(type="submit", value = "Yes, I'm sure")

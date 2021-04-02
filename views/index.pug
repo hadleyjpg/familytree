@@ -1,6 +1,6 @@
-extends layout.pug
+extends layout
 
 block content
-  section#form
-    form(action="/", method="post")
-      include form
+  header  
+    h1= title
+  p Welcome to #{title}

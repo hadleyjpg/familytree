@@ -1,19 +1,24 @@
 extends ../layout
 
 block content
-  div.members
-    each member in members
-      div.cards__single
-        div.cards__text
-          h3 #{member.firstname} #{member.lastname}
-          p b. #{member.birthday}
-          p= member.role
-        div.btn__changes
-          a(href="/members/" + member.id + "/edit", class="btn--edit")
-            svg(xmlns='http://www.w3.org/2000/svg' width='29.846' height='29.843' viewbox='0 0 29.846 29.843')
+  h2 #{member.firstname} #{member.lastname}
+  p b. #{member.birthday}
+  p= member.role
+  div.btns
+    a(href="../", class="btn--back")
+      svg#Capa_1(version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewbox='0 0 512 512' style='enable-background:new 0 0 512 512;' xml:space='preserve')
+        g
+          g
+            path(d='M492,236H68.442l70.164-69.824c7.829-7.792,7.859-20.455,0.067-28.284c-7.792-7.83-20.456-7.859-28.285-0.068\
+            l-104.504,104c-0.007,0.006-0.012,0.013-0.018,0.019c-7.809,7.792-7.834,20.496-0.002,28.314c0.007,0.006,0.012,0.013,0.018,0.019\
+            l104.504,104c7.828,7.79,20.492,7.763,28.285-0.068c7.792-7.829,7.762-20.492-0.067-28.284L68.442,276H492\
+            c11.046,0,20-8.954,20-20C512,244.954,503.046,236,492,236z')
+    div.btns--editor 
+      a(href="/members/" + member.id + "/edit", class="btn--edit")
+        svg(xmlns='http://www.w3.org/2000/svg' width='29.846' height='29.843' viewbox='0 0 29.846 29.843')
               path#Path_1(data-name='Path 1' d='M41.419,16.172a4.11,4.11,0,0,0-5.808,0l-1.454,1.462L18.682,33.1l-.033.033c-.008.008-.008.016-.016.016-.016.025-.041.049-.057.074,0,.008-.008.008-.008.016-.016.025-.024.041-.041.066-.008.008-.008.016-.016.025-.008.025-.016.041-.025.066,0,.008-.008.008-.008.016L15.044,43.738a.808.808,0,0,0,.2.838.827.827,0,0,0,.583.238.972.972,0,0,0,.263-.041L26.4,41.331c.008,0,.008,0,.016-.008a.3.3,0,0,0,.074-.033.029.029,0,0,0,.017-.008c.024-.016.057-.033.082-.05s.049-.041.074-.057c.008-.008.016-.008.016-.016s.025-.016.033-.033L43.644,24.2a4.11,4.11,0,0,0,0-5.807ZM26.141,39.4l-5.717-5.717L34.732,19.376l5.717,5.717Zm-6.522-4.2L24.613,40.2l-7.5,2.5ZM42.486,23.047l-.871.879L35.9,18.209l.879-.879a2.464,2.464,0,0,1,3.482,0l2.234,2.234A2.472,2.472,0,0,1,42.486,23.047Z' transform='translate(-15 -14.971)' fill='#e5ead6')
-          a(href="/members/" + member.id + "/delete", class="btn--delete")
-            svg(xmlns='http://www.w3.org/2000/svg' width='27.242' height='26.242' viewbox='0 0 27.242 26.242')
+      a(href="/members/" + member.id + "/delete", class="btn--delete")
+        svg(xmlns='http://www.w3.org/2000/svg' width='27.242' height='26.242' viewbox='0 0 27.242 26.242')
               g#Group_1(data-name='Group 1' transform='translate(-512.879 -434.379)')
                 line#Line_4(data-name='Line 4' x1='23' y2='22' transform='translate(515 436.5)' fill='none' stroke='#e5ead6' stroke-linecap='round' stroke-width='3')
                 line#Line_5(data-name='Line 5' x2='21.5' y2='22' transform='translate(515.75 436.5)' fill='none' stroke='#e5ead6' stroke-linecap='round' stroke-width='3')
