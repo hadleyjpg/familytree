@@ -1,4 +1,3 @@
-const express = require('express');
 const assert = require('assert');
 const request = require('supertest');
 const expect = require('chai').expect;
@@ -6,7 +5,6 @@ const chai = require('chai');
 const memberModel = require('../models/member');
 const memberRoute = require('../routes/members');
 const app = require('../app');
-const Member = require('../models').Member;
 
 describe('get', () => {
 
