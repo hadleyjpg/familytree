@@ -1,52 +1,62 @@
+const express = require('express');
 const assert = require('assert');
 const request = require('supertest');
 const expect = require('chai').expect;
+const chai = require('chai');
 const memberModel = require('../models/member');
-const memberRoute = require('../routes/member');
+const memberRoute = require('../routes/members');
 const app = require('../app');
+const Member = require('../models').Member;
 
-describe('post', () => {
+describe('get', () => {
 
-    describe('when firstname is left empty', () => {
-        it('should throw error', () => {
-
+    describe('when opening app at /', () => {
+        it('should redirect to /members', () => {
+            return request(app).get('/')
+                .then((res) => {
+                    assert.strictEqual(res.status, 302);
+                });
         });
-    });
 
-    describe('when lastname is left empty', () => {
-        it('should throw error');
-    });
+        it('should render plain text template', async () => {
+            return request(app).get('/')
+            .then((res) => {
+                expect(res.type).to.be.equal('text/plain');
+            });
+        });
 
-    describe('when birthday is left empty', () => {
-        it('should throw error');
+        it('should list out all family members', async () => {
+            return request(app).get('/members')
+                .expect(200) 
+                .then(async (res) => {
+                    const members = await Member.findAll();
+                });
+        });
     });
 
 });
 
-describe('put', () => {
+describe('post', () => {
 
-    describe('when firstname is left empty', () => {
-        it('should throw error');
-    });
-
-    describe('when lastname is left empty', () => {
-        it('should throw error');
-    });
-
-    describe('when birthday is left empty', () => {
-        it('should throw error');
+    describe('when editing family member', () => {
+        it('should render html template', async () => {
+            return request(app).get('/members/19/edit')
+            .then((res) => {
+                expect(res.type).to.be.equal('text/html');
+            });
+        });
     });
 
 });
 
 describe('delete', () => {
 
-    describe('when family member is destoryed', () => {
-        it('should redirect to home page', () => {
-            return request(app).delete("/member/:id/delete")
-                .then((res) => {
-                    assert.strictEqual(res.status, 301);
-                });
+    describe('when deleting family member', () => {
+        it('should render html template', async () => {
+            return request(app).get('/members/19/delete')
+            .then((res) => {
+                expect(res.type).to.be.equal('text/html');
+            });
         });
     });
 
